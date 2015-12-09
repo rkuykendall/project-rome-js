@@ -1,21 +1,22 @@
-
-/* Game namespace */
+/**
+ * main
+ */
 var game = {
 
-    // an object where to store game information
-    data : {
-        // score
-        score : 0
-    },
+    /**
+     *
+     * Initialize the application
+     */
+    onload: function() {
 
-
-    // Run on page load.
-    "onload" : function () {
-        // Initialize the video.
-        if (!me.video.init(960, 640, {wrapper : "screen", scale : "auto"})) {
+        // init the video
+        if (!me.video.init(400, 400, {wrapper : "screen", scale : "auto"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
+
+        // Set some default debug flags
+        me.debug.renderHitBox = true;
 
         // add "#debug" to the URL to enable the debug Panel
         if (me.game.HASH.debug === true) {
@@ -24,28 +25,39 @@ var game = {
             });
         }
 
-        // Initialize the audio.
-        me.audio.init("mp3,ogg");
-
-        // Set a callback to run when loading is complete.
+        // set all ressources to be loaded
         me.loader.onload = this.loaded.bind(this);
 
-        // Load the resources.
+        // set all ressources to be loaded
         me.loader.preload(game.resources);
 
-        // Initialize melonJS and display a loading screen.
+        // load everything & display a loading screen
         me.state.change(me.state.LOADING);
     },
 
-    // Run on game resources loaded.
-    "loaded" : function () {
-        me.state.set(me.state.MENU, new game.TitleScreen());
+
+    /**
+     * callback when everything is loaded
+     */
+    loaded: function ()    {
+
+        // set the "Play/Ingame" Screen Object
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
-        // add our player entity in the entity pool
-        me.pool.register("mainPlayer", game.PlayerEntity);
+        // set the fade transition effect
+        me.state.transition("fade","#000000", 250);
 
-        // Start the game.
+        // register our objects entity in the object pool
+        var text = new game.TextEntity(0,0,100,20);
+        text.isPersistent = true;
+        me.game.world.addChild(text);
+
+        // register on mouse event
+        me.input.registerPointerEvent("pointermove", me.game.viewport, function (event) {
+            me.event.publish("pointermove", [ event ]);
+        },false);
+
+        // switch to PLAY state
         me.state.change(me.state.PLAY);
     }
 };

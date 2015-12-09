@@ -19,7 +19,7 @@
 
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
-        <script type="text/javascript" src="lib/melonJS-2.1.3.js"></script>
+        <script type="text/javascript" src="lib/melonJS.js"></script>
 
         <!-- Plugin(s) -->
         <script type="text/javascript" src="lib/plugins/debug/debugPanel.js"></script>
@@ -29,26 +29,24 @@
         <script type="text/javascript" src="build/js/resources.js"></script>
 
         <script type="text/javascript" src="js/entities/entities.js"></script>
-        <script type="text/javascript" src="js/entities/HUD.js"></script>
 
-        <script type="text/javascript" src="js/screens/title.js"></script>
         <script type="text/javascript" src="js/screens/play.js"></script>
         <!-- /build -->
         <!-- Bootstrap & Mobile optimization tricks -->
         <script type="text/javascript">
-            window.onReady(function onReady() {
-                game.onload();
+          window.onReady(function onReady() {
+            game.onload();
 
-                // Mobile browser hacks
-                if (me.device.isMobile && !navigator.isCocoonJS) {
-                    // Prevent the webview from moving on a swipe
-                    window.document.addEventListener("touchmove", function (e) {
-                        e.preventDefault();
-                        window.scroll(0, 0);
-                        return false;
-                    }, false);
-                }
-            });
+            // Mobile browser hacks
+            if (me.device.isMobile && !navigator.isCocoonJS) {
+              // Prevent the webview from moving on a swipe
+              window.document.addEventListener("touchmove", function (e) {
+                e.preventDefault();
+                window.scroll(0, 0);
+                return false;
+              }, false);
+            }
+          });
         </script>
     </body>
 </html>
