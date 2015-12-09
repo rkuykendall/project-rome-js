@@ -4,7 +4,7 @@ game.resources = [
      * @example
      * { name: "example", type:"image", src: "data/img/example.png" },
      */
-    { name: "hexmini",  type:"image", src: "data/img/Tileset_Hexagonal_PointyTop_60x52_60x80" },
+    { name: "hexmini",  type:"image", src: "data/img/Tileset_Hexagonal_PointyTop_60x52_60x80.png" },
 
     /* Maps.
      * @example
