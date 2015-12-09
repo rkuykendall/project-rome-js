@@ -4,14 +4,14 @@ game.resources = [
      * @example
      * { name: "example", type:"image", src: "data/img/example.png" },
      */
-    { name: "hexmini",  type:"image", src: "data/img/hexmini.png" },
+    { name: "hexmini",  type:"image", src: "data/img/Tileset_Hexagonal_PointyTop_60x52_60x80" },
 
     /* Maps.
      * @example
      * { name: "example01", type: "tmx", src: "data/map/example01.tmx" },
      * { name: "example01", type: "tmx", src: "data/map/example01.json" },
       */
-    { name: "hexagonal-mini", type: "tmx", src: "data/map/hexagonal-mini.tmx" },
+    { name: "hexagonal-mini", type: "tmx", src: "data/map/map.tmx" },
 
     /* Background music.
      * @example
