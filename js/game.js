@@ -45,7 +45,7 @@ var game = {
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // set the fade transition effect
-        me.state.transition("fade","#000000", 250);
+        me.state.transition("fade","#19232b", 250);
 
         // register our objects entity in the object pool
         var text = new game.TextEntity(0,0,100,20);

@@ -1,6 +1,7 @@
 body {
   /* Allow canvas to hit the edges of the browser viewport. */
   margin: 0;
+  background-color: #19232b;
 }
 
 #screen canvas {
