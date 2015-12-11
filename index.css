@@ -2,7 +2,7 @@ body {
   /* Allow canvas to hit the edges of the browser viewport. */
   margin: 0;
   /**background-color: #19232b; */
-  background-image: url("http://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA14106-1280x1024.jpg");
+  background-image: url("/data/img/bg.jpg");
 }
 
 #screen canvas {
