@@ -10,7 +10,7 @@ var game = {
     onload: function() {
 
         // init the video
-        if (!me.video.init(800, 800, {wrapper : "screen", scale : "auto"})) {
+        if (!me.video.init(800, 800, {wrapper : "screen", scale : "auto", transparent : "true"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
@@ -21,7 +21,7 @@ var game = {
         // add "#debug" to the URL to enable the debug Panel
         if (me.game.HASH.debug === true) {
             window.onReady(function () {
-                me.plugin.register.defer(this, me.debug.Panel, "debug", me.input.KEY.v);
+                me.plugin.register.defer(this, me.debug.Panel, "debug", me.input.KEY.V);
             });
         }
 
