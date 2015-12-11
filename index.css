@@ -3,6 +3,7 @@ body {
   margin: 0;
   /**background-color: #19232b; */
   background-image: url("/data/img/bg.jpg");
+
 }
 
 #screen canvas {
