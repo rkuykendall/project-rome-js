@@ -61,11 +61,19 @@ game.ShipEntity = me.Renderable.extend({
                 var layer = me.game.world.getChildByName("Ground")[0];
                 var tile = layer.getTile(event.gameWorldX, event.gameWorldY);
                 if (tile) {
-                    self.col = tile.col;
-                    self.row = tile.row;
+                    self.setTile(tile.col, tile.row);
                 }
             }
         });
+    },
+
+    setTile : function (col, row) {
+        this.col = col;
+        this.row = row;
+
+        odd = this.row % 2 == 1;
+        this.pos.x = (this.col * 60) + 100 + (this.row % 2 * 30);
+        this.pos.y = (this.row * 39);
     },
 
     draw : function (renderer) {
@@ -78,9 +86,6 @@ game.ShipEntity = me.Renderable.extend({
     },
 
     update : function () {
-        odd = this.row % 2 == 1;
-        this.pos.x = (this.col * 60) + 100 + (this.row % 2 * 30);
-        this.pos.y = (this.row * 39);
         return true;
     },
 })
