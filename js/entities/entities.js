@@ -80,7 +80,7 @@ game.ShipEntity = me.Renderable.extend({
     update : function () {
         odd = this.row % 2 == 1;
         this.pos.x = (this.col * 60) + 100 + (this.row % 2 * 30);
-        this.pos.y = (this.row * 40);
+        this.pos.y = (this.row * 39);
         return true;
     },
 })
