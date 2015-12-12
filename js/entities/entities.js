@@ -1,4 +1,3 @@
-
 /************************************************************************************/
 /*                                                                                  */
 /*        a text entity                                                           */
@@ -22,6 +21,7 @@ game.TextEntity = me.Renderable.extend({
                 var layer = me.game.world.getChildByName("Ground")[0];
                 var tile = layer.getTile(event.gameWorldX, event.gameWorldY);
                 if (tile) {
+                    console.log(tile);
                     self.text = tile.col + "," + tile.row;
                 }
             }
@@ -61,8 +61,8 @@ game.ShipEntity = me.Renderable.extend({
                 var layer = me.game.world.getChildByName("Ground")[0];
                 var tile = layer.getTile(event.gameWorldX, event.gameWorldY);
                 if (tile) {
-                    this.col = tile.col;
-                    this.row = tile.row;
+                    self.col = tile.col;
+                    self.row = tile.row;
                 }
             }
         });
@@ -78,8 +78,9 @@ game.ShipEntity = me.Renderable.extend({
     },
 
     update : function () {
-        this.pos.x = this.row * 20;
-        this.pos.y = this.col * 20;
+        odd = this.row % 2 == 1;
+        this.pos.x = (this.col * 60) + 100 + (this.row % 2 * 30);
+        this.pos.y = (this.row * 40);
         return true;
     },
 })

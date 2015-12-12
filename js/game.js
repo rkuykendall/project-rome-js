@@ -52,7 +52,7 @@ var game = {
         text.isPersistent = true;
         me.game.world.addChild(text);
 
-        var ship = new game.ShipEntity(200,200,100,20);
+        var ship = new game.ShipEntity(7200,4200,100,20);
         ship.isPersistent = true;
         me.game.world.addChild(ship);
 
