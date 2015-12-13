@@ -7,7 +7,7 @@ script: py.test
 env:
   global:
   - secure: HDaMwy2GZTN6p2sE30yzdEAws4qHiUbRqXn1Bi5tzZ4La8FzTPn8uyay1bVpjxMmngl3d/0oA2G5/qvgjsfkcHkShxYDYF1l1q6VgDdsRnFpnE2AMn6b6llZcJXWZXgBX+Vs4I/ScWtb3DQ09hJqjIu895xMje75xx1K0Sw4yQs=
-after_deploy:
+after_success:
 - npm install
 - gulp pack
 - git remote set-url origin "https://${GH_TOKEN}@github.com/rkuykendall/project-rome-js.git"
