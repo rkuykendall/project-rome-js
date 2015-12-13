@@ -1,8 +1,8 @@
-game.PlayScreen = me.ScreenObject.extend({
+export default me.ScreenObject.extend({
     /**
      *  action to perform on state change
      */
-    onResetEvent: function() {
+    onResetEvent() {
         // load a level
         me.levelDirector.loadLevel("map");
     },
@@ -10,6 +10,6 @@ game.PlayScreen = me.ScreenObject.extend({
     /**
      *  action to perform on state change
      */
-    onDestroyEvent: function() {
+    onDestroyEvent() {
     }
 });

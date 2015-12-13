@@ -1,13 +1,18 @@
+import resources from './resources';
+import PlayScreen from './screens/play';
+import TextEntity from './entities/text';
+import ShipEntity from './entities/ship';
+
 /**
  * main
  */
-var game = {
+window.game = {
 
     /**
      *
      * Initialize the application
      */
-    onload: function() {
+    onload() {
 
         // init the video
         if (!me.video.init(800, 800, {wrapper : "screen", scale : "auto", transparent : "true"})) {
@@ -29,37 +34,37 @@ var game = {
         me.loader.onload = this.loaded.bind(this);
 
         // set all ressources to be loaded
-        me.loader.preload(game.resources);
+        me.loader.preload(resources);
 
         // load everything & display a loading screen
         me.state.change(me.state.LOADING);
     },
 
-
     /**
      * callback when everything is loaded
      */
-    loaded: function ()    {
+    loaded() {
 
         // set the "Play/Ingame" Screen Object
-        me.state.set(me.state.PLAY, new game.PlayScreen());
+        this.playScreen = new PlayScreen();
+        me.state.set(me.state.PLAY, this.playScreen);
 
         // set the fade transition effect
-        me.state.transition("fade","#19232b", 250);
+        me.state.transition("fade", "#19232b", 250);
 
         // register our objects entity in the object pool
-        var text = new game.TextEntity(0,0,100,20);
+        let text = new TextEntity(0, 0, 100, 20);
         text.isPersistent = true;
         me.game.world.addChild(text);
 
-        var ship = new game.ShipEntity(7200,4200,100,20);
+        let ship = new ShipEntity(7200, 4200, 100, 20);
         ship.isPersistent = true;
         me.game.world.addChild(ship);
 
         // register on mouse event
         me.input.registerPointerEvent("pointermove", me.game.viewport, function (event) {
             me.event.publish("pointermove", [ event ]);
-        },false);
+        }, false);
 
         // switch to PLAY state
         me.state.change(me.state.PLAY);
