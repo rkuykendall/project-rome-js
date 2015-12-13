@@ -11,6 +11,10 @@ var ghPages = require('gulp-gh-pages');
 
 var webpackConfig = require('./webpack.config.js')
 
+gulp.task('test', function(callback) {
+  return true;
+});
+
 gulp.task('serve', function(callback) {
     // Start a webpack-dev-server
     var compiler = webpack(webpackConfig);
