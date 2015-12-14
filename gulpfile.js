@@ -47,6 +47,6 @@ gulp.task('pack', function() {
 });
 
 gulp.task('deploy', function() {
-  return gulp.src('./build/**/*')
+  return gulp.src('./**/*')
     .pipe(ghPages());
 });
