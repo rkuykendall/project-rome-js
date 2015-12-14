@@ -8,7 +8,6 @@ env:
   global:
   - secure: lCSe4Ovdk4Z1S5yXEtqMOlcVGcoFePf00iPFRKjD3jY4BA9MjXuyTprBfQCrIfFfuCKOGXo3LgmJvewO1K1AA1TqJQSbc3iJl/iWeSfFFSz/NLVsR1VA68k5+fd+LKScJebG31XG50M0w3visrT/nDndonPaq6qvJQwQMjqrQb+eNjeBafeveuYzu10bU+LLe+DOvDmjT1AdDUkkfxLwrqqG30sN0fjnL3NLbjgyNIQQXrUjdv69S4cVpOotkoWfbLhOJLuj9JPNDl6BTNXuCbV0pPAvNgtIN/jMd+R4+YdXJpWJG4/FgBISpDA7j8Jxeogh6MAwiPk30OSGvPPdxxeW85sOS9e5fWdSvfrLE9rmp/opFn0+XAvpxNMKOjHFqaAWpYi6Q94twRPWtp1kAY48EiecMkyQJaOoQuWam7NYbphtFwoOx0R+15+VK4NE4bZEVMMCgcDPdyJwTCKVc8pme+uAQ5IQpElXXYeEj8MUUsLHYXxr7BgZf+drIFXak45boXrX9mww+2MxXlD+agpfKHLDsoBEgQbDBTbUzG4CDiHKwOqn9EdWN4e5Ik77rXakUv03Xm1pxQq0738oVF5lA69+BDQHX0knUdKmzg/+6LfGBgczl2TthLtKLUWGl3FeW32XJlgg65uabdQg/UmVlHcRYdsUQwjYbadAuoc=
 after_success:
-- npm install
 - gulp pack
 - git remote set-url origin "https://${GH_TOKEN}@github.com/rkuykendall/project-rome-js.git"
 - git config --global user.email "robert@rkuykendall.com"
