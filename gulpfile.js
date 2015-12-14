@@ -60,6 +60,10 @@ gulp.task('pack', function() {
     .pipe(gulp.dest('build'))
 
   gulp
+    .src('CNAME')
+    .pipe(gulp.dest('build'))
+
+  gulp
     .src('index.html')
     .pipe(gulp.dest('build'))
 
