@@ -1,6 +1,7 @@
 /*eslint-disable no-var, no-console, vars-on-top*/
 
 var gulp = require('gulp');
+var watch = require('gulp-watch');
 var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var gzip = require('gulp-gzip');
@@ -16,11 +17,26 @@ gulp.task('test', function(callback) {
 });
 
 gulp.task('serve', function(callback) {
+    gulp
+      .src('index.html')
+      .pipe(watch('index.html'))
+      .pipe(gulp.dest('build'));
+
+    gulp
+      .src('index.css')
+      .pipe(watch('index.css'))
+      .pipe(gulp.dest('build'));
+
+    gulp
+      .src(['data/**/*'])
+      .pipe(watch(['data/**/*']))
+      .pipe(gulp.dest('build/data'));
+
     // Start a webpack-dev-server
     var compiler = webpack(webpackConfig);
 
     new WebpackDevServer(compiler, {
-        contentBase: './',
+        contentBase: './build/',
         hot: true,
         watchOptions: {
             aggregateTimeout: 100,
@@ -39,6 +55,18 @@ gulp.task('serve', function(callback) {
 });
 
 gulp.task('pack', function() {
+  gulp
+    .src('index.css')
+    .pipe(gulp.dest('build'))
+
+  gulp
+    .src('index.html')
+    .pipe(gulp.dest('build'))
+
+  gulp
+    .src(['data/**/*'])
+    .pipe(gulp.dest('build/data'));
+
   // run webpack
   webpack(webpackConfig, function(err, stats) {
       if (err) throw new gutil.PluginError('webpack', err);
@@ -47,6 +75,6 @@ gulp.task('pack', function() {
 });
 
 gulp.task('deploy', function() {
-  return gulp.src('./**/*')
+  return gulp.src('./build/**/*')
     .pipe(ghPages());
 });

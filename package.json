@@ -17,6 +17,7 @@
     "gulp-gzip": "^1.2.0",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   },
