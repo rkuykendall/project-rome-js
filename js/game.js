@@ -24,9 +24,9 @@ window.game = {
         me.debug.renderHitBox = true;
 
         // add "#debug" to the URL to enable the debug Panel
-        if (me.game.HASH.debug === true) {
-            window.onReady(function () {
-                me.plugin.register.defer(this, me.debug.Panel, "debug", me.input.KEY.V);
+        if (me.game.HASH.debug === true && window.debugPanel) {
+            window.onReady(() => {
+                me.plugin.register.defer(this, window.debugPanel, "debug", me.input.KEY.V);
             });
         }
 
