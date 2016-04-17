@@ -1,28 +1,24 @@
-const path = require('path');
-const webpack = require('webpack');
-
 module.exports = {
-  entry: [
-    './lib/melonJS.js',
-    './lib/plugins/debugPanel.js',
-    './js/game.js'
-  ],
-  output: {
-    path: __dirname,
-    filename: 'build/bundle.js'
-  },
-  devtool: 'source-map',
-  module: {
-    loaders: [{
-      test: /\.html/, loader: 'file-loader'
-    }, {
-      text: /\.js$/,
-      include: path.join(__dirname, 'js'),
-      loader: 'babel-loader'
-    }, {
-      text: /\.js$/,
-      loader: 'eslint-loader',
-      exclude: /node_modules|lib/
-    }]
-  }
+    entry: './web/js/index.js',
+    output: {
+        path: require('path').resolve('./web'),
+        filename: 'bundle.js'
+    },
+    module: {
+        loaders: [
+            { test: /\.json$/, loader: 'json-loader' },
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel'
+            },
+            {
+                test: /\.es6?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel'
+            }
+        ]
+    }
 };
