@@ -27389,7 +27389,7 @@
 	 * a simple debug panel plugin
 	 * usage : me.plugin.register.defer(this, me.debug.Panel, "debug");
 	 *
-	 * you can then use me.plugin.debug.show() or me.plugin.debug.hide()
+	 * you can then use me.plugins.debug.show() or me.plugins.debug.hide()
 	 * to show or hide the panel, or press respectively the "S" and "H" keys.
 	 *
 	 * note :
@@ -27433,7 +27433,7 @@
 	            this._super(me.Renderable, "init", [ 0, 0, me.game.viewport.width, DEBUG_HEIGHT ]);
 	
 	            // minimum melonJS version expected
-	            this.version = "2.1.0";
+	            this.version = "2.2.0";
 	
 	            // to hold the debug options
 	            // clickable rect area
@@ -27450,7 +27450,7 @@
 	
 	            // for z ordering
 	            // make it ridiculously high
-	            this.z = Infinity;
+	            this.pos.z = Infinity;
 	
 	            // visibility flag
 	            this.visible = false;
@@ -27578,8 +27578,12 @@
 	
 	                // draw the sprite rectangle
 	                if (me.debug.renderHitBox) {
+	                    var x = -this.anchorPoint.x * this.width;
+	                    var y = -this.anchorPoint.y * this.height;
+	
 	                    renderer.save();
 	                    renderer.setColor("green");
+	                    renderer.translate(x, y);
 	                    renderer.strokeRect(this.left, this.top, this.width, this.height);
 	                    _this.counters.inc("sprites");
 	                    renderer.restore();
@@ -27599,7 +27603,9 @@
 	                    // draw the bounding rect shape
 	                    renderer.setColor("orange");
 	                    bounds.copy(this.getBounds());
-	                    bounds.pos.sub(this.ancestor._absPos);
+	                    if (this.ancestor) {
+	                        bounds.pos.sub(this.ancestor._absPos);
+	                    }
 	                    renderer.drawShape(bounds);
 	                    _this.counters.inc("bounds");
 	
@@ -27616,7 +27622,9 @@
 	
 	                if (me.debug.renderVelocity && (this.body.vel.x || this.body.vel.y)) {
 	                    bounds.copy(this.getBounds());
-	                    bounds.pos.sub(this.ancestor._absPos);
+	                    if (this.ancestor) {
+	                        bounds.pos.sub(this.ancestor._absPos);
+	                    }
 	                    // draw entity current velocity
 	                    var x = ~~(bounds.pos.x + (bounds.width / 2));
 	                    var y = ~~(bounds.pos.y + (bounds.height / 2));
@@ -27647,14 +27655,18 @@
 	                    // draw the bounding rect shape
 	                    renderer.setColor("orange");
 	                    bounds.copy(this.getBounds());
-	                    bounds.pos.sub(this.ancestor._absPos);
+	                    if (this.ancestor) {
+	                        bounds.pos.sub(this.ancestor._absPos);
+	                    }
 	                    renderer.drawShape(bounds);
 	                    _this.counters.inc("bounds");
 	
 	                    // draw the children bounding rect shape
 	                    renderer.setColor("purple");
 	                    bounds.copy(this.childBounds);
-	                    bounds.pos.sub(this.ancestor._absPos);
+	                    if (this.ancestor) {
+	                        bounds.pos.sub(this.ancestor._absPos);
+	                    }
 	                    renderer.drawShape(bounds);
 	                    _this.counters.inc("children");
 	
@@ -27669,11 +27681,13 @@
 	        show : function () {
 	            if (!this.visible) {
 	                // register a mouse event for the checkboxes
-	                me.input.registerPointerEvent("pointerdown", this, this.onClick.bind(this), true);
+	                me.input.registerPointerEvent("pointerdown", this, this.onClick.bind(this));
 	                // add the debug panel to the game world
 	                me.game.world.addChild(this, Infinity);
 	                // mark it as visible
 	                this.visible = true;
+	                // force repaint
+	                me.game.repaint();
 	            }
 	        },
 	
@@ -27689,6 +27703,8 @@
 	                me.game.world.removeChild(this);
 	                // mark it as invisible
 	                this.visible = false;
+	                // force repaint
+	                me.game.repaint();
 	            }
 	        },
 	
@@ -27922,6 +27938,7 @@
 	     */
 	
 	    onload: function onload() {
+	        var _this = this;
 	
 	        // init the video
 	        if (!me.video.init(800, 800, { wrapper: "screen", scale: "auto", transparent: "true" })) {
@@ -27933,9 +27950,9 @@
 	        me.debug.renderHitBox = true;
 	
 	        // add "#debug" to the URL to enable the debug Panel
-	        if (me.game.HASH.debug === true) {
+	        if (me.game.HASH.debug === true && window.debugPanel) {
 	            window.onReady(function () {
-	                me.plugin.register.defer(this, me.debug.Panel, "debug", me.input.KEY.V);
+	                me.plugin.register.defer(_this, window.debugPanel, "debug", me.input.KEY.V);
 	            });
 	        }
 	
@@ -27948,6 +27965,7 @@
 	        // load everything & display a loading screen
 	        me.state.change(me.state.LOADING);
 	    },
+	
 	
 	    /**
 	     * callback when everything is loaded
@@ -28022,6 +28040,7 @@
 	    // load a level
 	    me.levelDirector.loadLevel("map");
 	  },
+	
 	
 	  /**
 	   *  action to perform on state change
