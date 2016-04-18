@@ -1,5 +1,5 @@
 var displayHelper = function(_, eventEmitter) {
-	
+
 	function onResize() {
 		eventEmitter.emit('resize', {
 			width: window.innerWidth,

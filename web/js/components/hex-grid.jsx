@@ -30,8 +30,8 @@ var HexGrid = function(_, React, Group, HexTile, PureRenderMixin) {
 
 	function setupHexPositionsRadial(widthPixels, heightPixels, countHorizontal, countVertical) {
 		var size = getOptimalSize(
-				widthPixels, 
-				heightPixels, 
+				widthPixels,
+				heightPixels,
 				countHorizontal,
 				countVertical
 		);
@@ -63,7 +63,7 @@ var HexGrid = function(_, React, Group, HexTile, PureRenderMixin) {
 					keyName: 'tile_' + axialXCoord + '_' + axialYCoord,
 					axialCoordinates: {
 						x: axialXCoord,
-						y: axialYCoord 
+						y: axialYCoord
 					},
 					cubeCoordinates: {
 						x: axialXCoord,
@@ -91,9 +91,9 @@ var HexGrid = function(_, React, Group, HexTile, PureRenderMixin) {
 			var hexCountVertical = this.props.hexCountVertical;
 
 			var hexPositions = setupHexPositionsRadial(
-					widthPixels, 
-					heightPixels, 
-					hexCountHorizontal, 
+					widthPixels,
+					heightPixels,
+					hexCountHorizontal,
 					hexCountVertical
 			);
 
