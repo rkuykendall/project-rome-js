@@ -45631,7 +45631,7 @@
 				return React.createElement(
 					Surface,
 					{ width: width, height: height },
-					React.createElement(HexGrid, { width: width, height: height, hexCountHorizontal: '25', hexCountVertical: '13' })
+					React.createElement(HexGrid, { width: width, height: height, hexCountHorizontal: '20', hexCountVertical: '21' })
 				);
 			}
 		});

@@ -24,7 +24,7 @@ var GameBoard = function(React, Surface, HexGrid, PureRenderMixin, displayHelper
 
 			return (
 				<Surface width={ width } height={ height }>
-					<HexGrid width={ width } height={ height } hexCountHorizontal='25' hexCountVertical='13' />
+					<HexGrid width={ width } height={ height } hexCountHorizontal='20' hexCountVertical='21' />
 				</Surface>
 			);
 		}
