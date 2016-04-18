@@ -45610,6 +45610,7 @@
 			mixins: [PureRenderMixin],
 			getInitialState: function getInitialState() {
 				return {
+					units: [{ row: 2, col: 1 }],
 					displayDimensions: displayHelper.getDimensions()
 				};
 			},
@@ -45631,7 +45632,7 @@
 				return React.createElement(
 					Surface,
 					{ width: width, height: height },
-					React.createElement(HexGrid, { width: width, height: height, hexCountHorizontal: '20', hexCountVertical: '21' })
+					React.createElement(HexGrid, { width: width, height: height, hexCountHorizontal: '4', hexCountVertical: '5', units: this.state.units })
 				);
 			}
 		});
@@ -45731,18 +45732,26 @@
 				var heightPixels = this.props.height;
 				var hexCountHorizontal = this.props.hexCountHorizontal;
 				var hexCountVertical = this.props.hexCountVertical;
+				var allUnits = this.props.units;
 
 				var hexPositions = setupHexPositionsRadial(widthPixels, heightPixels, hexCountHorizontal, hexCountVertical);
 
-				var hexGrid = _.map(hexPositions, function (hexRow, index) {
-					var rowElements = _.map(hexRow, function (hexData) {
+				var hexGrid = _.map(hexPositions, function (hexRow, rowNum) {
+					var rowNumL = rowNum;
+					var rowElements = _.map(hexRow, function (hexData, numCol) {
 						var hexKey = hexData.keyName;
-						return React.createElement(HexTile, { key: hexKey, size: hexData.size, centre: hexData.pixelCoordinates });
+						var rowNumLL = rowNumL;
+						var numColL = numCol;
+						var units = _.filter(allUnits, {
+							row: rowNumLL,
+							col: numColL
+						});
+						return React.createElement(HexTile, { key: hexKey, size: hexData.size, centre: hexData.pixelCoordinates, units: units });
 					});
 
 					return React.createElement(
 						Group,
-						{ key: 'row_' + index },
+						{ key: 'row_' + rowNum },
 						rowElements
 					);
 				});
@@ -45805,7 +45814,7 @@
 				});
 			},
 			render: function render() {
-				var color = this.state.isSelected ? '#888' : '#111';
+				var color = !!this.props.units.length ? '#888' : '#111';
 
 				// TODO - this could be optimised, don't need to calculate coords for every hex, just one and then offset.
 				var path = makeHexPath(this.props.size, this.props.centre);
