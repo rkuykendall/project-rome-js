@@ -4,6 +4,7 @@ var GameBoard = function(React, Surface, HexGrid, PureRenderMixin, displayHelper
 		mixins: [PureRenderMixin],
 		getInitialState: function() {
 			return {
+				units: [{row: 2, col: 1}],
 				displayDimensions: displayHelper.getDimensions()
 			}
 		},
@@ -24,7 +25,7 @@ var GameBoard = function(React, Surface, HexGrid, PureRenderMixin, displayHelper
 
 			return (
 				<Surface width={ width } height={ height }>
-					<HexGrid width={ width } height={ height } hexCountHorizontal='20' hexCountVertical='21' />
+					<HexGrid width={ width } height={ height } hexCountHorizontal='4' hexCountVertical='5' units={this.state.units} />
 				</Surface>
 			);
 		}

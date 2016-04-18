@@ -89,6 +89,7 @@ var HexGrid = function(_, React, Group, HexTile, PureRenderMixin) {
 			var heightPixels = this.props.height;
 			var hexCountHorizontal = this.props.hexCountHorizontal;
 			var hexCountVertical = this.props.hexCountVertical;
+			var allUnits = this.props.units;
 
 			var hexPositions = setupHexPositionsRadial(
 					widthPixels,
@@ -97,16 +98,23 @@ var HexGrid = function(_, React, Group, HexTile, PureRenderMixin) {
 					hexCountVertical
 			);
 
-			var hexGrid = _.map(hexPositions, function(hexRow, index) {
-				var rowElements = _.map(hexRow, function(hexData) {
+			var hexGrid = _.map(hexPositions, function(hexRow, rowNum) {
+				var rowNumL = rowNum;
+				var rowElements = _.map(hexRow, function(hexData, numCol) {
 					var hexKey = hexData.keyName;
+					var rowNumLL = rowNumL;
+					var numColL = numCol;
+					var units = _.filter(allUnits, {
+						row: rowNumLL,
+						col: numColL
+					});
 					return (
-						<HexTile key={ hexKey } size={hexData.size} centre={hexData.pixelCoordinates}></HexTile>
+						<HexTile key={ hexKey } size={hexData.size} centre={hexData.pixelCoordinates} units={units}></HexTile>
 					);
 				});
 
 				return (
-					<Group key={ 'row_' + index }>
+					<Group key={ 'row_' + rowNum }>
 						{ rowElements }
 					</Group>
 				);

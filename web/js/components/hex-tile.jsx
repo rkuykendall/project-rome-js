@@ -39,7 +39,7 @@ var HexTile = function(React, Shape, Path, PureRenderMixin) {
 			});
 		},
 		render: function() {
-			var color = this.state.isSelected ? '#888' : '#111';
+			var color = !!this.props.units.length ? '#888' : '#111';
 
 			// TODO - this could be optimised, don't need to calculate coords for every hex, just one and then offset.
 			var path = makeHexPath(this.props.size, this.props.centre);
